@@ -35,7 +35,7 @@ From this result, the mapping  rate has only 2.32% for 2 reasons. The first is t
 
 The second is that the propagation is a simple loop for all nodes. When we update the mapping list, the unmapped nodes that has been processed before maybe could be mapped. The bigger mapping list, the bigger possible to be mapped.
 
-Part 3: Improved Algorithm (Zehao Cai)
+Part 3: Improved Algorithm
 
 I made improvement over two parts, both the seed selection stage and propagation stage.
 For the seed selection part, the core algorithm remains the same. In the baseline algorithm, we change the k(the size of the clique) to find a successful mapping and only pick one k for mapping. In the improved algorithm, I try to start by making k = 10 then find the clique one by one to k = 3. See code
