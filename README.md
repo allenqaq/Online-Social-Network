@@ -18,7 +18,8 @@ Part 2: Implement S&P 09 Pape
 Here, little adjustment is adding into the algorithm. When calculating the node scores, adding a parameter that about the degree can make the algorithm work better.
 
 skip = rgraph.in_degree(rnode[1]) - rgraph.in_degree(lnode)
-# skip is a degree check supposing 2 mapping mode degree differential is less than 3
+
+skip is a degree check supposing 2 mapping mode degree differential is less than 3
                 if skip > 3 or skip < -3 :
                     continue
 
@@ -49,21 +50,30 @@ Also, we make ε small enough, because we have known the two graphs we have coll
 
 For the second part of propagation, the basic idea is similar to the baseline algorithm but I have changed it to make successful in mapping and more efficient in running the code.
 The details of propagation algorithm is shown as below
+
 (1) . The algorithm takes as input the G(san).
+
 (2). The algorithm takes as input the G(aux)
-(3). The algorithm picks a mapped node v and v’ between G(san) and G(aux), and for each node v and v’ list all their neighbours v(nbr), for each neighbour node v(nbr) we list its four attributes
+
+(3). The algorithm picks a mapped node v and v’ between G(san) and G(aux), and for each node v and v’ list all their
+
+neighbours v(nbr), for each neighbour node v(nbr) we list its four attributes
+
 	1’ List all v(nbr)’s neighbour nodes that are outcoming nodes and in the mapped nodes (between G(san) and G(aus)).
 	2’ List all v(nbr)’s neighbour nodes that are incoming node and in the mapped nodes (between G(san) and G(aus))
 	3’ Compute the number of the v(nbr)’s neighbour nodes that are outcoming nodes and NOT in the mapped nodes.
 	4’ Compute the number of the nodes that are incoming nodes and NOT in the mapped nodes.
+	
 (4). Try to map all the neighbour nodes of v and neighbour nodes of v’ using similarity scores based on the four attributes.
 	Similarity scores consists of four parts corresponding to four attributes.
+	
 	1’  1 - (the size of the common outcoming nodes in the mapped graph) /  (the maximum number of outcoming nodes)
 	2’ 1 - (the size of the common incoming nodes in the mapped graph) /  (the maximum number of incoming nodes)
 	3’ the absolute value of the difference between the number of outcoming nodes not in the mapped node of G(san) and G(aus) / the max value of previous two numbers
 	4’ similar to 3’ , compute the nodes of incoming.
 	See source code `improved_propagation.py` line
 	If the similarity scores is lower, it is more likely that two nodes are matched.
+	
  (5) Repeat step (3) and (4) using bfs until we have mapped the maximum nodes.
 
 In the source code, I make more minor changes to the algorithm mainly to speed up.
